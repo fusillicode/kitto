@@ -12,6 +12,9 @@ defmodule Kitto.Router do
   plug Kitto.Plugs.Authentication
 
   if Application.get_env(:kitto, :serve_assets?, true) do
+    Logger.info "====="
+    Logger.info Kitto.root
+    Logger.info "====="
     plug Plug.Static,
          at: "assets",
          gzip: true,
