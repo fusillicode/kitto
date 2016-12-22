@@ -5,7 +5,7 @@ defmodule Kitto.Router do
 
   if Application.get_env(:kitto, :debug), do: use Plug.Debugger, otp_app: :kitto
   unless Mix.env == :test, do: plug Plug.Logger
-  use Plug.ErrorHandler
+  if Application.get_env(:kitto, :handle_errors?, true), do: use Plug.ErrorHandler
 
   plug :match
   plug Kitto.Plugs.Authentication
