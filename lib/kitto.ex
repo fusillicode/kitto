@@ -14,7 +14,7 @@ defmodule Kitto do
 
   use Application
   import Supervisor.Spec, warn: false
-  require Logger
+  import Logger
 
   @defaults %{ip: {127, 0, 0, 1}, port: 4000}
 
