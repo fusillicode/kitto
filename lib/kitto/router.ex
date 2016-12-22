@@ -2,6 +2,7 @@ defmodule Kitto.Router do
   use Plug.Router
 
   alias Kitto.{View, Notifier}
+  import Router
 
   if Application.get_env(:kitto, :debug), do: use Plug.Debugger, otp_app: :kitto
   unless Mix.env == :test, do: plug Plug.Logger
@@ -105,10 +106,10 @@ defmodule Kitto.Router do
   match _, do: render_error(conn, 404, "Not Found")
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
-    IO.puts "============Handling error============"
-    IO.puts "Kind: #{inspect kind}"
-    IO.puts "Reason: #{inspect reason}"
-    IO.puts "======================================"
+    Logger.error "============Handling error============"
+    Logger.error "Kind: #{inspect kind}"
+    Logger.error "Reason: #{inspect reason}"
+    Logger.error "======================================"
 
     render_error(conn, 500, "Something went wrong")
   end
