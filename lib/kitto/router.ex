@@ -104,8 +104,14 @@ defmodule Kitto.Router do
 
   match _, do: render_error(conn, 404, "Not Found")
 
-  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: _stack}),
-    do: render_error(conn, 500, "Something went wrong")
+  def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
+    IO.puts "============Handling error============"
+    IO.puts "Kind: #{inspect kind}"
+    IO.puts "Reason: #{inspect reason}"
+    IO.puts "======================================"
+
+    render_error(conn, 500, "Something went wrong")
+  end
 
   defp render(conn, template, bindings \\ []),
     do: send_resp(conn, 200, View.render(template, bindings))
