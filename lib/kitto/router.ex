@@ -2,7 +2,7 @@ defmodule Kitto.Router do
   use Plug.Router
 
   alias Kitto.{View, Notifier}
-  import Router
+  require Logger
 
   if Application.get_env(:kitto, :debug), do: use Plug.Debugger, otp_app: :kitto
   unless Mix.env == :test, do: plug Plug.Logger
